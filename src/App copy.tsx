@@ -9,63 +9,16 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
-import VerifiedUser from "@mui/icons-material/VerifiedUser";
 
 function App() {
   const [openItems, setOpenItems] = useState<Record<number, boolean>>({});
   const [searchTerm, setSearchTerm] = useState(""); // State untuk pencarian
-  const [data, setData] = useState<Mahasiswa[]>([]);
-  const [notFound, setNotFound] = useState(false);
-  const [githubUser, setGithubUser] = useState(null);
-  const [githubQuery, setGithubQuery] = useState("");
 
   const handleClick = (id: number) => {
     setOpenItems((prev) => ({
       ...prev,
       [id]: !prev[id], // Toggle hanya untuk item yang diklik
     }));
-  };
-
-  interface Point {
-    id: number;
-    title: string;
-    ket: string;
-    nilai_point: string;
-  }
-
-  interface Mahasiswa {
-    id: number;
-    name: string;
-    point: Point[];
-  }
-
-  React.useEffect(() => {
-    handleSearch();
-  }, [searchTerm]);
-
-  const handleSearch = async () => {
-    if (!searchTerm) return;
-
-    try {
-      const response = await fetch(
-        `http://localhost:5001/mahasiswa/search?name=${searchTerm}`
-      );
-      const result: Mahasiswa[] = await response.json();
-
-      if (response.ok) {
-        setData(result);
-        setNotFound(false);
-        console.log("Error fetching data:", result);
-      } else {
-        setData([]);
-        setNotFound(true);
-        console.log("Error fetching data:", result);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setData([]);
-      setNotFound(true);
-    }
   };
 
   const dataList = [
@@ -103,7 +56,7 @@ function App() {
   ];
 
   // **Filter dataList berdasarkan nama**
-  const filteredData = data.filter((item) =>
+  const filteredData = dataList.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -111,27 +64,15 @@ function App() {
     <div className="App">
       <div className="content">
         <div id="todo-header" className="header">
-          <h1>Student Data</h1>
+          <h1>Data Mahasiswa</h1>
           <input
             type="text"
-            placeholder="Search name..."
+            placeholder="Cari nama..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          {/* <span className="add-button">Search</span> */}
+          <span className="add-button">Cari</span>
         </div>
-
-        {searchTerm.length > 0 ? (
-          <p
-            style={{
-              paddingInline: "16px",
-              textAlign: "left",
-              color: "#888",
-            }}
-          >
-            Showing user for "{searchTerm}"
-          </p>
-        ) : null}
 
         <List
           sx={{ width: "100%", bgcolor: "background.paper" }}
@@ -139,14 +80,14 @@ function App() {
         >
           {searchTerm === "" ? (
             <p style={{ padding: "10px", textAlign: "center", color: "#888" }}>
-              Please search for student data...
+              Silakan cari data mahasiswa...
             </p>
           ) : filteredData.length > 0 ? (
-            filteredData.map((item: Mahasiswa) => (
+            filteredData.map((item) => (
               <React.Fragment key={item.id}>
                 <ListItemButton onClick={() => handleClick(item.id)}>
                   <ListItemIcon>
-                    <VerifiedUser />
+                    <InboxIcon />
                   </ListItemIcon>
                   <ListItemText primary={item.name} />
                   {openItems[item.id] ? <ExpandLess /> : <ExpandMore />}
@@ -175,7 +116,7 @@ function App() {
             ))
           ) : (
             <p style={{ padding: "10px", textAlign: "center", color: "red" }}>
-              Data not found
+              Data tidak ditemukan
             </p>
           )}
         </List>

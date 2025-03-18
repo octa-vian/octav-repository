@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/octav-repository/static/css/main.641ad29b.css",
+    "main.js": "/octav-repository/static/js/main.8d46ee5a.js",
+    "static/js/453.c978e124.chunk.js": "/octav-repository/static/js/453.c978e124.chunk.js",
+    "index.html": "/octav-repository/index.html",
+    "main.641ad29b.css.map": "/octav-repository/static/css/main.641ad29b.css.map",
+    "main.8d46ee5a.js.map": "/octav-repository/static/js/main.8d46ee5a.js.map",
+    "453.c978e124.chunk.js.map": "/octav-repository/static/js/453.c978e124.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.641ad29b.css",
+    "static/js/main.8d46ee5a.js"
+  ]
+}

@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+link demo: https://octa-vian.github.io/octav-repository/
+
+or
+
 In the project directory, you can run:
 
 ### `npm start`

@@ -14,7 +14,7 @@ import VerifiedUser from "@mui/icons-material/VerifiedUser";
 import { wait } from "@testing-library/user-event/dist/utils";
 
 function App() {
-  const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+  //const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
   const [openItems, setOpenItems] = useState<Record<number, boolean>>({});
   const [searchTerm, setSearchTerm] = useState(""); // State untuk pencarian
   const [data, setData] = useState<Repository[]>([]);
@@ -116,12 +116,12 @@ function App() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://api.github.com/search/users?q=${searchTerm}&per_page=5`,
-        {
-          headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-          },
-        }
+        `https://api.github.com/search/users?q=${searchTerm}&per_page=5`
+        // {
+        //   headers: {
+        //     Authorization: `token ${GITHUB_TOKEN}`,
+        //   },
+        // }
       );
       setUsers(response.data.items);
       console.log("Success", response.data.items);
@@ -135,12 +135,12 @@ function App() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://api.github.com/users/${username}/repos`,
-        {
-          headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-          },
-        }
+        `https://api.github.com/users/${username}/repos`
+        // {
+        //   headers: {
+        //     Authorization: `token ${GITHUB_TOKEN}`,
+        //   },
+        // }
       );
       setRepos([]);
       setRepos(response.data);
@@ -155,12 +155,12 @@ function App() {
 
     try {
       const response = await fetch(
-        `https://api.github.com/users/${searchTerm}/repos`,
-        {
-          headers: {
-            Authorization: `token ${GITHUB_TOKEN}`,
-          },
-        }
+        `https://api.github.com/users/${searchTerm}/repos`
+        // {
+        //   headers: {
+        //     Authorization: `token ${GITHUB_TOKEN}`,
+        //   },
+        // }
       );
 
       const result: Repository[] = await response.json();

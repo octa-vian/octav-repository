@@ -195,7 +195,12 @@ function App() {
             type="text"
             placeholder="Search User..."
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              if (e.target.value === "") {
+                setUsers([]);
+              }
+            }}
           />
           <span onClick={searchUsers} className="add-button">
             Search
